@@ -1,0 +1,19 @@
+apiVersion: apps/v1 
+kind: ReplicaSet 
+metadata: 
+  name: organic-rs 
+spec: 
+  replicas: 4
+  selector:
+    matchLabels:
+      app: web
+  template: 
+    metadata: 
+      labels:
+        app: web 
+    spec:
+      containers:
+        - name: test-cont
+          image: muralisocial123/organic-app-web:latest
+          ports:
+            - containerPort: 5656
