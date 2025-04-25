@@ -1,0 +1,16 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: organic-pod 
+spec:
+  containers:
+    - name: organic-container 
+      image: muralisocial123/organic-app-web:latest
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 5656
+    - name: web-app 
+      image: muralisocial123/test-web-oracle-example:1.0
+      imagePullPolicy: Always
+      ports:
+        - containerPort: 80
