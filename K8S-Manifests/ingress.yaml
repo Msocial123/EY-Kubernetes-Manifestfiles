@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cart-organic-ingress 
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx 
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/cart(/|$).(.*)"
+        backend:
+          service:
+            name: cart-svc 
+            port: 
+              number: 3001
+      - pathType: Prefix
+        path: "/organic(/|$).(.*)"
+        backend:
+          service:
+            name: oragnic-svc 
+            port: 
+              number: 5657
+      - pathType: Prefix
+        path: "/(.*)"
+        backend:
+          service:
+            name: oragnic-svc
+            port: 
+              number: 5657                
+        

@@ -1,36 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: organic-deployment
-  namespace: murali
+  name: organic-app-deployment 
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: myapp
+      web: organic
   template:
     metadata:
       labels:
-        app: myapp
+        web: organic 
     spec:
       containers:
-      - name: sample-app
+      - name: test-cont 
         image: muralisocial123/organic-app-web:latest
         resources:
           limits:
             memory: "128Mi"
-            cpu: "50m"
+            cpu: "250m"
+          requests:
+            memory: "100Mi"
+            cpu: "100m"  
         ports:
         - containerPort: 5656
----        
+--- 
 apiVersion: v1
 kind: Service
 metadata:
-  name: organic-svc
+  name: oragnic-svc 
 spec:
   selector:
-    app: myapp
+    web: organic 
   ports:
   - port: 5657
     targetPort: 5656
-  type: LoadBalancer  
+  type: ClusterIP    
